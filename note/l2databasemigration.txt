@@ -1,0 +1,74 @@
+==> Availabel Column's Data TABLE_TYPE
+
+CREATE Table if not exists tables(
+    id INT,
+    name VARCHAR(50),
+    age INT
+);
+
+==>Create Table(app >model);
+
+
+
+Method 1 (Model / Table)
+php artisan make:model Student -m
+
+Method 2 (Table)
+(i) php artisan make:migration created_students_table
+
+(iI) php artisan make:migration created_workers_table --create="workers"
+..................................................................................
+
+
+
+
+
+==>Available Columns's Dat Type (databast > Migrations)
+$table->id();
+$table->bigIncrements('id');
+$table->increments('id');
+
+
+$table->bigInteger('id');
+$table->unsignedInteger('id');
+$table->unsignedBigInteger('id');
+
+$table->tinyInteger('status');
+$table->smallInteger('votes');
+
+$table->binary('photo');
+$table->boolean('confirm');
+
+$table->char('name',30);
+$table->string('name',100);
+$table->string('name');
+$table->text('decription');
+$table->tinytext('notes');
+$table->mediumtext('content');
+$table->longtext('article');
+
+
+$table->time('bookingtime');
+$table->date('created_at');
+$table->year('birthyear');
+
+$table->timestamps(); //system auto created_at ,updated_at
+$table->timestamp('action'); //custom
+
+
+$table->decimal('amount',precision=10,scale=2);
+$table->float('measure',8,2);
+
+$table->set('flavors',['strawberryy','vanilla']);
+$table->enum('payment',['visa','JCB','wave','mpu']);
+
+
+$table->json('payment','multiphones');
+$table->ipAddress('visitor');//198.162.1.10
+$table->macAddress('device');
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+//PHP Framework
+    => Laravel
+
+
+Laravel Features
+email
+qr code
+mapping
+cart
+chart
+opt
+
+class object
+
+
+
+==>
+model view controller ==>MVC (calculation)
+crud
+professional + classic php + features + dynamic project
+
+
+
+==> required application (xammp)
+php
+composer
+mysql
+webserver
+npm
+nodejs
+
+
+VSCode 
+
+==>Website
+https://laravel.com/
+
+
+
+==> Download Laravel
+composer create-project laravel/laravel projectname
+
+......................................................................................................
+
+
+
+==>MVC Framework(Model, View, controller)
+
+==>Model
+it's is work with database (select, Insert, update,delete)
+communicate with controller
+
+==>View
+A view is the part of the application that respresents the presentation of data html css code for user see.
+
+==>Controller
+to mediate and connect between model and view
+the controller receives input form the user, process the request (get,post,put,delete)
+
+......................................................................................................
+
+=>FOLDER and FILES STRUCTURES
+
+
+app > Models
+database > migrations (to create table)
+
+resources > views
+app > Http > Controllers 
+
+
+
+public  > (images / video / audio / custom css / custom JS )
+
+
+routes > wep.php (or) routes > api.php
+
+
+.env (Main Imformantion page / Access Key)
+
+......................................................................................................
+
+==> Run project (local:8000)
+php artisan serve
+
+
+==> Stop project (503)
+php artisan down
+
+        => Stop Project (by redirect)
+        php artisan down --redirect=/https://google.com
+
+
+==> Resume project
+php artisan up
+
+
+......................................................................................................
+
