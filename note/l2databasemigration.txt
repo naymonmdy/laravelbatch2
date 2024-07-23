@@ -16,14 +16,41 @@ php artisan make:model Student -m
 Method 2 (Table)
 (i) php artisan make:migration created_students_table
 
-(iI) php artisan make:migration created_workers_table --create="workers"
+(ii) php artisan make:migration created_workers_table --create="workers"
+..................................................................................
+
+database connect > create model > create migration > migrate > Mess Assignments
+
+..................................................................................
+
+ .env
+
+ DB_CONNECTION = mysql
+ DB_HOST = 127.0.0.1
+ DB_PORT = 3306
+ DB_DATABASE = lessonone
+ DB_USERNAME = root 
+ DB_PASSWORD =  
+
+ mysql -u root -p 
+ naymon195225
+
+
+ CREATE DATABASE lessonone;
+
+ SHOW DATABASES;
+
+
+
+
+
 ..................................................................................
 
 
 
 
 
-==>Available Columns's Dat Type (databast > Migrations)
+==>Available Columns's Data Type (database > Migrations)
 $table->id();
 $table->bigIncrements('id');
 $table->increments('id');
@@ -68,7 +95,138 @@ $table->ipAddress('visitor');//198.162.1.10
 $table->macAddress('device');
 
 
+..................................................................................
+
+=>Check Migrate status
+php artisan migrate:status
+
+=>Migrate table to database
+php artisan migrate
+
+=>Check Before migrate by pretend
+php artisan migrate --pretend
+
+=>Undo Migration
+php artisan migrate:rollback
+
+=>Check Before rollback by pretend
+php artisan migrate:rollback --pretend
+
+=>Undo Migration by step
+php artisan migrate:rollback --step=2
+
+=>Delete all tables (auto rollback)
+php artisan migrate:reset
+
+=>Delete all datas (auto rollback / auto migrate)
+php artisan migrate:refresh --step=2
+
+..................................................................................
+
+=> Add New Columns
+php artisan make:migration add_city_to_create_shoppers_table --table=shoppers
+
+=> Drop New Columns
+php artisan make:migration remove_age_to_students_table --table=students
+$table->dropColumn('age');
+$down();
+$table->int('age');
+
+=>Sort Column
+$table->string('city')->after('phone');
+php artisan migrate --pretend
+
+fullname
+age
+phone
+created_at
+updated_at
+city
+
+=>down (for rollback)
+$table->dropColumn('city');
+
+=>Rename Column rename(from,to)
+php artisan mark:migration rename_students_column --table=students
+=>up()
+$table->renameColumn('phoneNumber','phone');
+$table->renameColumn('address','city');
+
+=>down()
+$table->renameColumn('phone','phoneNumber');
+$table->renameColumn('city','address');
+
+
+=>Rename Table rename(from,to)
+
+php artisan make:migration rename_cu_to_customers_table --table=cu
+=>Up()
+Schema::rename('cu','customer');
+
+=>Down ()
+Schema::rename('customer','cu');
+..................................................................................
+
+==>Default value
+
+php artisan mark:migration create_books_table --create="books"; 
+
+=>Up 
+
+Schema::create('books',function(Blueprint $table){
+    $table->id;
+    $table->string('title');
+    $table->tinyInteger('status')->default('1');
+    $table->enum('copyright',['0','1'])->default('0');
+    $table->enum('solidfile',array('pdf','txt','.html'))->default('0');
+    $table->timestamp('create_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+    $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+    $table->timestamp('create_time')->useCurrent();
+    $table->timestamp('updated_time')->useCurrent()->useCurrentOnUpdate();
+
+});
+ 
+..................................................................................
+
+Mess Assignments (Model > Book)
+
+php artisan make:model Book;
+
+protected $table = "books";
+protected $primaryKey = "id";
+
+
+Method 1;
+
+protected $fillable = [
+    'title',
+    'status',
+    'copyright',
+    'solidfile',
+    'created_time',
+    'updated_time'
+]
+
+
+Method 2;
+
+protected $guarded = [];
+..................................................................................
+
+=>DB:: CRUD 3 Ways
+
+
+METHOD 1
+DB::raw()
 
 
 
+METHOD 2 From Laravel
+DB::raw()
 
+
+METHOD 3 From Laravel
+DB::select();
+DB::update();
+DB::insert();
+DB::delete();
