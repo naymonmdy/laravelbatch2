@@ -1,0 +1,105 @@
+==>Create Table(app >model);
+
+
+=>Create Model 
+
+php artisan make:model Student 
+
+..................................................................................
+database connect > create model > create migration > Mess Assignments > migrate
+..................................................................................
+
+
+
+=>Inspecting Models to database Table
+php artisan model:show Student
+
+..................................................................................
+
+Mess Assignments (Model > Book)
+
+php artisan make:model Book;
+
+protected $table = "books";
+protected $primaryKey = "id";
+
+=>Customize timestamps
+const CREATED_AT = 'created_date';
+const UPDATED_AT = 'updated_date';
+
+Method 1;
+
+protected $fillable = [
+    'title',
+    'status',
+    'copyright',
+    'solidfile',
+    'created_time',
+    'updated_time'
+]
+
+
+Method 2;
+
+protected $guarded = [];
+
+..................................................................................
+
+=>Retrieving data from model ( Single/Multi )
+
+=Multi
+$books = Book::all();
+return $book;
+
+
+(Method 1)
+foreach($books as $book)
+{
+    echo"$book->title <br/> $book->copyright <hr/>";
+}
+
+
+
+(Method 2) // Retrieving datas matching by where Method
+
+$book = Book::where('invoiceid',5)->get();
+return $book;
+
+foreach($books as $book)
+{
+    echo"$book->title <br/> $book->copyright <hr/>";
+}
+
+
+=>ASC /DEC
+$book = Book::where('city',"mandalay")->orderBy('id',"asc")->get();
+return $book;
+
+$book = Book::where('city',"mandalay")->orderBy('id',"desc")->get();
+return $book;
+
+$book = Book::where('city',"mandalay")->orderByDesc('id')->get();
+return $book;
+
+---------------------
+=Single
+
+(Method 1) //Retrieving a data by primaryKey 
+$book = Book::find(5);
+return $book;
+
+echo"$book->title <br/> $book->copyright <hr/>";
+
+
+
+
+
+(Method 2) // Retrieving a data by primaryKey with error Mode Exception
+$book = Book::findOrFail(5);
+return $book;
+
+echo"$book->title <br/> $book->copyright <hr/>";
+
+..................................................................................
+
+

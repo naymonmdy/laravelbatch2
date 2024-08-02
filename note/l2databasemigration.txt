@@ -195,6 +195,9 @@ php artisan make:model Book;
 protected $table = "books";
 protected $primaryKey = "id";
 
+=>Customize timestamps
+const CREATED_AT = 'created_date';
+const UPDATED_AT = 'updated_date';
 
 Method 1;
 
@@ -230,3 +233,32 @@ DB::select();
 DB::update();
 DB::insert();
 DB::delete();
+
+DB::table()->select()->get();
+DB::table()->selectRaw()->get();
+
+..................................................................................
+=>Trigger
+
+php artisan make:migration create_triggertablename_trigger
+
+
+public function up():void{
+    \DB::upprepared(
+        "
+            CREATE TRIGGER  trigger_bfc
+            BEFORE INSERT ON tablename FOE EACH ROW
+            BEGIN
+
+
+            END
+        "
+    );
+}
+
+public function down():void{
+    \DB::upprepared("DROP TRIGGER IF EXISTS trigger_bfc");
+    
+}
+
+..................................................................................
